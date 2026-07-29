@@ -229,7 +229,7 @@
     h.clear(0);
 
     h.setColor(3).setFontMonofonto36().setFontAlign(0, 0).drawString("BOOK-IT", 240, 28);
-    h.setColor(2).setFontMonofonto16().setFontAlign(0, 0).drawString(curSubtitle, 240, 65);
+    h.setColor(2).setFontMonofonto16().setFontAlign(0, 0).drawString(curSubtitle, 242, 65);
     
     h.setColor(0);
     h.fillRect(24, 84, 456, 296);
@@ -283,7 +283,9 @@
     h.setColor(3).setFontMonofonto16();
 
     h.setFontAlign(0, -1);
-    let displayName = curFile;
+    let displayName = curFile.slice(curFile.lastIndexOf('/') + 1);
+    let dotIdx = displayName.lastIndexOf('.');
+    if (dotIdx !== -1) displayName = displayName.slice(0, dotIdx);
     if (displayName.length > 40) displayName = displayName.slice(0, 37) + "...";
     h.drawString(displayName, 240, 4);
 
