@@ -3,7 +3,7 @@
   "Got a library card?",
   "Now get to reading!",
   "Intelligence +1",
-  "Fiction or on-fiction?",
+  "Fiction or non-fiction?",
   "Now with 57% less paper!",
   "You wouldn't steal a Holotape.",
   "A product of Vault 919",
