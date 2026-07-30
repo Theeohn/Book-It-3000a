@@ -22,52 +22,7 @@
   let brightness = 1.0;
   let lastKnob = 0;
 
-  const subtitles = [
-    "Knowledge is power!",
-    "Got a library card?",
-    "Now get to reading!",
-    "Intelligence +1",
-    "Fiction or Non-Fiction?",
-    "Now with 57% less paper!",
-    "You wouldn't steal a Holotape.",
-    "A product of Vault 919",
-    "You load 16 tons, and what do you get?",
-    "Read it again, my Johnny.",
-    "I Have No Book and I Must Read",
-    "U, U, D, D, L, R, L, R, B, A, S",
-    "[ Hidden ]",
-    "[ Caution ]",
-    "[ Danger ]",
-    "You take a sip from your trusty Vault 13 canteen.",
-    "War. War never changes.",
-    "You cannot fast travel when enemies are nearby.",
-    "You cannot fast travel when overencumbered.",
-    "I came, I saw, I looted.",
-    "Ain't that a kick in the head!",
-    "Moo, I say.",
-    "Please assume the position.",
-    "Welcome to Camp Navarro. So, you're the new replacement.",
-    "I have a theoretical degree in physics!",
-    "Drink. Some. Water.",
-    "Don't mind me, just enjoying the view.",
-    "Give me that chip.",
-    "LIGAF",
-    "Believe in the you that I believe in!",
-    "Then who was phone?",
-    "I am serious, and don't call me Shirley.",
-    "Now, walk this way.",
-    "Always look on the bright side of life!",
-    "He never wants a second cup of coffee at home...",
-    "Be prepared.",
-    "We apologize for the inconvenience.",
-    "DON'T PANIC",
-    "Everything is connected.",
-    "I'm not a fan of reality, it's a bit overrated.",
-    "Pining for the f'jords.",
-    "Oh no, not again...",
-    "I know what we're gonna do today!",
-    "But wait, there's more!",
-  ];
+  const subtitles = eval(require("fs").readFileSync("HOLO/BOOK_IT/subs.js"));
   let curSubtitle = subtitles[0];
 
   function pathJoin(a, b) {
@@ -206,7 +161,7 @@
     let text = dump ? E.toString(dump) : "";
     f.close();
 
-    let wrapped = h.setFontMonofonto16().wrapString(text, 424);
+    let wrapped = h.setFontMonofonto16().wrapString(text, 416);
     
     lines = wrapped.slice(0, 15);
     isEOF = (wrapped.length <= 15);
@@ -254,9 +209,9 @@
       if (item.type === 'back') {
         label = "< " + item.label;
       } else if (item.type === 'folder') {
-        label = "/ " + item.label + "/";
+        label = "/" + item.label + "/";
       } else {
-        label = item.label;
+      label = item.label.slice(0, -4);
       }
 
       if (label.length > 45) label = label.slice(0, 42) + "...";
@@ -299,7 +254,7 @@
     }
 
     h.setFontMonofonto14().setFontAlign(0, 0).setColor(2);
-    h.drawString("Page " + (curPage + 1), 240, 310);
+    h.drawString("Page " + (curPage + 1) + " / " + (isEOF ? pageOffs.length : pageOffs.length), 240, 310);
 
     h.flip();
     Pip.lastFlip = getTime();
